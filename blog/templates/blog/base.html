@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>Django blog</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
         <link rel="stylesheet" href="{% static 'login.css' %}">
     </head>
@@ -25,10 +25,10 @@
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span> New post</a></li>
                   <li><a href="{% url 'post_draft_list' %}"><span class="glyphicon glyphicon-edit"></span> Edit post</a></li>
-                  <li><a href="auth/logout/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                  <li><a href="logout/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                   {% else %}
-                  <li><a href="auth/register/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                  <li><a href="auth/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  <li><a href="register/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 {% endif %}
               </ul>
             </div>
@@ -38,13 +38,13 @@
         {% endblock %}
         {% block register %}
         {% endblock %}
-	   <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
+	    <div class="content container">
+          <div class="row">
+            <div class="col-md-8">
+              {% block content %}
+              {% endblock %}
             </div>
+          </div>
         </div>
     </body>
 </html>
