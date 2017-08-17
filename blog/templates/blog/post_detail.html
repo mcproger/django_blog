@@ -13,18 +13,11 @@
 	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 	<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a> 
 	{% endif %}
-	<div class="media">
-	  <div class="media-left">
-	    <img src="img_avatar1.png" class="media-object" style="width:60px">
-	  </div>
-	  <div class="media-body">
-	    <h4 class="media-heading">{{ post.author }}</h4>
-	    <h3>{{ post.title }}</h3>
-	    <div class="well">
-	      <p>{{ post.text|linebreaksbr }}</p>
-	    </div>
-	  </div>
-	</div>
+    <h4>{{ post.author }}</h4>
+    <h3>{{ post.title }}</h3>
+    <div class="well">
+      <p>{{ post.text|linebreaksbr }}</p>
+    </div>
 </div>
 {% endblock %}
 
