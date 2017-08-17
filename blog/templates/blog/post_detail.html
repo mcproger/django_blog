@@ -7,16 +7,23 @@
 			{{ post.published_date }}
 		</div>
 	{% else %}
-	
-		<a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+	<a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
 	{% endif %}
 	{% if user.is_authenticated %}
 	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 	<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a> 
 	{% endif %}
-	<h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+	<div class="media">
+	  <div class="media-left">
+	    <img src="img_avatar1.png" class="media-object" style="width:60px">
+	  </div>
+	  <div class="media-body">
+	    <h4 class="media-heading">{{ post.author }}</h4>
+	    <h3>{{ post.title }}</h3>
+	    <p>{{ post.text|linebreaksbr }}</p>
+	  </div>
+	</div>
 </div>
-    {% endblock %}
+{% endblock %}
 
 	
