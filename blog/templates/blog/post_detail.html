@@ -13,7 +13,7 @@
 	<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 	<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a> 
 	{% endif %}
-    <h4>Created by: <mark>{{ post.author }}</mark></h4>
+    <h4>Author: <mark>{{ post.author }}</mark></h4>
     <h3>{{ post.title }}</h3>
     <div class="well">
       <p>{{ post.text|linebreaksbr }}</p>
