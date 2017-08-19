@@ -21,6 +21,9 @@
               <a class="navbar-brand" href="/">Django Blog</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url 'user_post_list' %}">My posts</a></li>
+              </ul>
               <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span> New post</a></li>
