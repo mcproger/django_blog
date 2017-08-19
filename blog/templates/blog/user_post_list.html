@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	{% for user_post in user_posts %}
+		<div class="container">
+          <h2><a href="{% url 'post_detail' pk=user_post.pk %}">{{ user_post.title }}</a></h2>
+          <hr>
+          <p>Created by: <mark>{{ user_post.author }}</mark> at {{ user_post.published_date }}</p>
+          <div class="panel panel-default">
+            <div class="panel-body">{{ user_post.text|truncatechars:50  }}</div>
+          </div>
+        </div>
+	{% endfor %}
+{% endblock content %}
