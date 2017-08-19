@@ -11,6 +11,13 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 
+def user_post_list(request):
+    username = request.user
+    user_posts = Post.objects.filter(
+        author=username).order_by('-published_date')
+    return render(request, 'blog/user_post_list.html', {'user_posts': user_posts})
+
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user == post.author:
