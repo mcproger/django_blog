@@ -20,7 +20,7 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
- 
+
 
 def register(request):
     user_create_form = UserCreationForm()
@@ -29,11 +29,10 @@ def register(request):
     new_user_form = UserCreationForm(request.POST)
     if new_user_form.is_valid():
         new_user_form.save()
-        new_user = auth.authenticate(username=new_user_form.cleaned_data['username'], password=new_user_form.cleaned_data['password1'])
+        new_user = auth.authenticate(
+            username=new_user_form.cleaned_data['username'], password=new_user_form.cleaned_data['password1'])
         auth.login(request, new_user)
         return redirect('/')
     else:
         user_create_form = new_user_form
     return render(request, 'register.html', {'form': user_create_form})
-
-
