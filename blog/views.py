@@ -13,7 +13,11 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    if request.user == post.author:
+        post_author = True
+    else:
+        post_author = False
+    return render(request, 'blog/post_detail.html', {'post': post, 'post_author': post_author})
 
 
 def post_new(request):
