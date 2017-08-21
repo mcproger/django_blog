@@ -11,7 +11,7 @@ class BlogViewsTest(TestCase):
         self.user_one = User.objects.create_user(
             username='user_one', password='password_one')
         self.user_two = User.objects.create_user(
-        	username='user_two', password='password_two')
+            username='user_two', password='password_two')
 
     def create_posts(self):
         post_one = models.Post.objects.create(
@@ -27,14 +27,12 @@ class BlogViewsTest(TestCase):
         response = self.client.get(reverse('post_list'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context['posts'], ['<Post: qwerty>', '<Post: qwerty>'])
+            response.context['posts'], ['<Post: qwerty_two>', '<Post: qwerty_one>'])
 
-   
     def test_user_post_list(self):
         self.create_posts()
         self.client.login(username='user_one', password='password_one')
         response = self.client.get(reverse('user_post_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerySetEqual(
+        self.assertQuerysetEqual(
             response.context['user_posts'], ['<Post: qwerty_one>'])
-    
