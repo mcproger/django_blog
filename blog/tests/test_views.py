@@ -19,7 +19,7 @@ class BlogViewsTest(TestCase):
         return posts
 
     def test_post_list(self):
-        posts = self.get_posts_queryset()
+        self.get_posts_queryset()
         response = self.client.get(reverse('post_list'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
