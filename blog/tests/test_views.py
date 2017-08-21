@@ -8,19 +8,33 @@ from blog import models
 
 class BlogViewsTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            username='user', password='password')
+        self.user_one = User.objects.create_user(
+            username='user_one', password='password_one')
+        self.user_two = User.objects.create_user(
+        	username='user_two', password='password_two')
 
-    def get_posts_queryset(self):
-        post = models.Post.objects.create(
-            author=self.user, title='qwerty', created_date=timezone.now())
-        post.publish()
-        posts = models.Post.objects.all()
-        return posts
+    def create_posts(self):
+        post_one = models.Post.objects.create(
+            author=self.user_one, title='qwerty_one', created_date=timezone.now())
+        post_two = models.Post.objects.create(
+            author=self.user_two, title='qwerty_two', created_date=timezone.now())
+        post_one.publish()
+        post_two.publish()
+        return None
 
     def test_post_list(self):
-        self.get_posts_queryset()
+        self.create_posts()
         response = self.client.get(reverse('post_list'))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context['posts'], ['<Post: qwerty>'])
+            response.context['posts'], ['<Post: qwerty>', '<Post: qwerty>'])
+
+   
+    def test_user_post_list(self):
+        self.create_posts()
+        self.client.login(username='user_one', password='password_one')
+        response = self.client.get(reverse('user_post_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerySetEqual(
+            response.context['user_posts'], ['<Post: qwerty_one>'])
+    
