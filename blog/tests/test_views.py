@@ -36,3 +36,11 @@ class BlogViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
             response.context['user_posts'], ['<Post: qwerty_one>'])
+
+    def test_post_detail(self):
+        self.create_posts()
+        post = models.Post.objects.get(author=self.user_one)
+        response = self.client.get(reverse('post_detail', args=(post.id,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context['post'], post)
