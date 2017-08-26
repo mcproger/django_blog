@@ -1,9 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 
-from blog import models, forms
+from blog import views, models, forms
 
 
 class BlogViewsTest(TestCase):
@@ -12,6 +12,8 @@ class BlogViewsTest(TestCase):
             username='user_one', password='password_one')
         self.user_two = User.objects.create_user(
             username='user_two', password='password_two')
+        self.factory = RequestFactory()
+
 
     def create_posts(self):
         post_one = models.Post.objects.create(
@@ -21,6 +23,11 @@ class BlogViewsTest(TestCase):
         post_one.publish()
         post_two.publish()
         return None
+
+    def create_form(self):
+        form_data = {'title': 'Doesn\'t matter'}
+        form = forms.PostForm(title='Doesn\'t matter')
+        return form
 
     def test_post_list_view(self):
         self.create_posts()
@@ -46,4 +53,11 @@ class BlogViewsTest(TestCase):
             response.context['post'], post)
 
     def test_post_new_view(self):
-    	pass
+        data = {
+            'title': 'My snippet',
+            'text': 'This is my snippet'
+        }
+        request = self.factory.post(reverse('post_new'), data)
+        request.user = self.user_one
+        response = views.post_new(request)
+        self.assertEqual(response.status_code, 302)
