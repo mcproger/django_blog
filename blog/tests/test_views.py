@@ -24,11 +24,6 @@ class BlogViewsTest(TestCase):
         post_two.publish()
         return None
 
-    def create_form(self):
-        form_data = {'title': 'Doesn\'t matter'}
-        form = forms.PostForm(title='Doesn\'t matter')
-        return form
-
     def test_post_list_view(self):
         self.create_posts()
         response = self.client.get(reverse('post_list'))
@@ -54,10 +49,13 @@ class BlogViewsTest(TestCase):
 
     def test_post_new_view(self):
         data = {
-            'title': 'My snippet',
-            'text': 'This is my snippet'
+            'title': 'Doesn\'t matter',
+            'text': 'Doesn\'t matter'
         }
         request = self.factory.post(reverse('post_new'), data)
         request.user = self.user_one
         response = views.post_new(request)
         self.assertEqual(response.status_code, 302)
+
+    def test_post_edit_view(self):
+        pass
