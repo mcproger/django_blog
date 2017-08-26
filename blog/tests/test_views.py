@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.test import TestCase, RequestFactory
 
-from blog import views, models, forms
+from blog import views, models
 
 
 class BlogViewsTest(TestCase):
@@ -68,3 +68,12 @@ class BlogViewsTest(TestCase):
         request.user = self.user_one
         response = views.post_edit(request, post.id)
         self.assertEqual(response.status_code, 302)
+
+    def test_post_draft_list_view(self):
+        pass
+
+    def test_post_publish_view(self):
+        pass
+
+    def test_post_remove_view(self):
+        pass
