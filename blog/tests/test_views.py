@@ -64,7 +64,7 @@ class BlogViewsTest(TestCase):
             'text': 'Doesn\'t matter'
         }
         request = self.factory.post(
-            reverse('post_edit', args=(post.id,)), data, instance=post)
+            reverse('post_edit', args=(post.id,)), data)
         request.user = self.user_one
         response = views.post_edit(request, post.id)
         self.assertEqual(response.status_code, 302)
