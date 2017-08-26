@@ -70,7 +70,9 @@ class BlogViewsTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_post_draft_list_view(self):
-        pass
+        self.create_posts()
+        response = self.client.get(reverse('post_draft_list'))
+        self.assertEqual(response.status_code, 200)
 
     def test_post_publish_view(self):
         pass
