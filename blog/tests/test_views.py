@@ -14,7 +14,6 @@ class BlogViewsTest(TestCase):
             username='user_two', password='password_two')
         self.factory = RequestFactory()
 
-
     def create_posts(self):
         post_one = models.Post.objects.create(
             author=self.user_one, title='qwerty_one', created_date=timezone.now())
@@ -58,4 +57,14 @@ class BlogViewsTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_post_edit_view(self):
-        pass
+        self.create_posts()
+        post = models.Post.objects.get(author=self.user_one)
+        data = {
+            'title': 'Doesn\'t matter',
+            'text': 'Doesn\'t matter'
+        }
+        request = self.factory.post(
+            reverse('post_edit', args=(post.id,)), data, instance=post)
+        request.user = self.user_one
+        response = views.post_edit(request, post.id)
+        self.assertEqual(response.status_code, 302)
