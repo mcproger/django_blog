@@ -8,11 +8,10 @@
 		</div>
 	{% else %}
 	<a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
-	<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 	{% endif %}
 	{% if user.is_authenticated and post_author %}
 		<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-		<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a> 
+		<a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 	{% endif %}
     <h4>Author: <mark>{{ post.author }}</mark></h4>
     <h3>{{ post.title }}</h3>
@@ -21,5 +20,3 @@
     </div>
 </div>
 {% endblock %}
-
-	
